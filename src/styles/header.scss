@@ -1,0 +1,155 @@
+.topLine {
+  width: 100%;
+  height: 3px;
+  background-color: #ff5f00;
+}
+
+.container {
+  max-width: 1260px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.header {
+  max-width: 1300px;
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  color: #512b2b;
+  line-height: 22px;
+  font-size: 17px;
+}
+
+.left__header, .right__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.private {
+  margin: 0 23px;
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  align-items: center;
+  cursor: pointer;
+  height: fit-content;
+}
+
+.client {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.login {
+  display: flex;
+  flex-direction: row;
+  margin: 0 10px;
+  gap: 7px;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 54px;
+  width: 100%;
+  max-width: 1260px;
+  border-top: 1px solid #fdf6ee;
+}
+
+.home, .search {
+  max-width: 60px;
+  width: 100%;
+  height: 54px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+.home:hover {
+  background-color: #f9f8f6;
+}
+
+.nav {
+  max-width: 190px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #4C2B2F;
+  font-size: 15px;
+  line-height: 17px;
+  padding: 6px 5px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    background-color: #f9f8f6;
+  }
+}
+
+.nav__active {
+  color: #ff5f00;
+}
+
+.container__steps {
+  background-color: #fdf6ee;
+  padding:0 20px 10px 20px;
+}
+
+.step {
+  color: #512b2b;
+  font-size: 12px;
+  line-height: 12px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.step1 {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.step3 {
+  font-weight: bold;
+}
+
+.continue {
+  font-size: 12px;
+  padding: 0 5px;
+}
+
+.title {
+  font-family: 'Roboto', sans-serif;
+  color: #fb4f00;
+  font-size: 32px;
+  line-height: 1.5;
+  margin: 0;
+  padding-top: 30px;
+}
