@@ -42,8 +42,9 @@ const initialFormData: InitialFormData = {
 const App = () => {
   const [formData, setFormData] = useState<InitialFormData>(initialFormData);
   const [activeQuestion, setActiveQuestion] = useState(0);
+  // const [symbols, setSymbols] = useState(500)
 
-  console.log(formData);
+  const symbols = 500 - formData.info.length;
 
   return (
     <section className="section">
@@ -111,79 +112,123 @@ const App = () => {
         <div className="navigation__beforeLine">
           <div className="column__beforeLine">
             <div className="circle__beforeLine active">1</div>
-            <a href="-" className="href__beforeLine">{titles[0]}</a>
+            <span
+              onClick={() => {
+                setActiveQuestion(0);
+              }}
+              className="href__beforeLine"
+            >
+              {titles[0]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">2</div>
-            <a href="-" className="href__beforeLine">{titles[1]}</a>
+            <span
+              onClick={() => {
+                setActiveQuestion(1);
+              }}
+              className="href__beforeLine"
+            >
+              {titles[1]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">3</div>
-            <a href="-" className="href__beforeLine">{titles[2]}</a>
+            <span
+              onClick={() => {
+                setActiveQuestion(2);
+              }}
+              className="href__beforeLine"
+            >
+              {titles[2]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">4</div>
-            <a href="-" className="href__beforeLine">{titles[3]}</a>
+            <span
+              onClick={() => {
+                setActiveQuestion(3);
+              }}
+              className="href__beforeLine"
+            >
+              {titles[3]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">5</div>
-            <a href="-" className="href__beforeLine">{titles[4]}</a>
+            <span
+              onClick={() => {
+              }}
+              className="href__beforeLine"
+            >
+              {titles[4]}
+            </span>
           </div>
         </div>
         <div className="container container__question">
-          <div className="box">
-            <h1 className="title">{titles[0]}</h1>
-            <h4>Transportlīdzekļa veids</h4>
-            <div className="input">
-              <label htmlFor="car">
-                <input
-                  id="car"
-                  name="vehicle"
-                  type="radio"
-                  value="car"
-                  onChange={(event) => setFormData({ ...formData, vehicleType: event.target.value })}
-                />
-                automašīna
-              </label>
-              <label htmlFor="bike">
-                <input
-                  id="bike"
-                  name="vehicle"
-                  type="radio"
-                  value="bike"
-                  onChange={(event) => setFormData({ ...formData, vehicleType: event.target.value })}
-                />
-                motocikls
-              </label>
-              <label htmlFor="other">
-                <input
-                  id="other"
-                  name="vehicle"
-                  type="radio"
-                  value="other"
-                  onChange={(event) => setFormData({ ...formData, vehicleType: event.target.value })}
-                />
-                cits
-              </label>
+          <h1 className="title__questions">{titles[0]}</h1>
+          <div className="box__form">
+            <div className="box__title">
+              <h4 className="title__form">Transportlīdzekļa veids </h4>
+              <h4 className="title__form title__form--star">*</h4>
+              <button className="button__question">?</button>
             </div>
-            <div className="box">
-              <h4>Transportlīdzekļa veids</h4>
+            <div className="box__inputs">
+              <div className="input">
+                <label htmlFor="car">
+                  <input
+                    id="car"
+                    name="vehicle"
+                    type="radio"
+                    value="automašīna"
+                    onChange={(event) => setFormData({ ...formData, vehicleType: event.target.value })}
+                  />
+                  automašīna
+                </label>
+                <label htmlFor="bike">
+                  <input
+                    id="bike"
+                    name="vehicle"
+                    type="radio"
+                    value="motocikls"
+                    onChange={(event) => setFormData({ ...formData, vehicleType: event.target.value })}
+                  />
+                  motocikls
+                </label>
+                <label htmlFor="other">
+                  <input
+                    id="other"
+                    name="vehicle"
+                    type="radio"
+                    value="cits"
+                    onChange={(event) => setFormData({ ...formData, vehicleType: event.target.value })}
+                  />
+                  cits
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="box__form">
+            <div className="box__title">
+              <h4 className="title__form">Transportlīdzekļa cena</h4>
+            </div>
+            <div className="box__input">
               <input
-                className="input"
+                className="input__number"
                 type="number"
                 value={formData.vehiclePrice}
                 onChange={(event) => setFormData({ ...formData, vehiclePrice: event.target.value })}
               />
             </div>
           </div>
-          <div className="navigation__underline">
-            <button onClick={() => {
-              setActiveQuestion(activeQuestion + 1);
-            }}
-            >
-              {'Tālāk>>'}
-            </button>
-          </div>
+        </div>
+        <div className="navigation__underline">
+          <button
+            className="next"
+            onClick={() => { setActiveQuestion(activeQuestion + 1); }}
+          >
+            {'Tālāk >>'}
+          </button>
         </div>
       </section>
       )}
@@ -211,31 +256,38 @@ const App = () => {
             <a href="-" className="href__beforeLine">{titles[4]}</a>
           </div>
         </div>
-        <div>
-          <h1 className="title">{titles[1]}</h1>
-          <label htmlFor="education">
-            <select name="education" id="education" onChange={(event) => setFormData({ ...formData, education: event.target.value })}>
-              <option value="empty"> </option>
-              <option value="basic">Pamatizglītība</option>
-              <option value="secondary">Vidējā</option>
-              <option value="vocational">Arodizglītība</option>
-              <option value="higher">Augstākā</option>
-              <option value="college">Koledžas</option>
-            </select>
-          </label>
+        <div className="container container__question">
+          <h1 className="title__questions">{titles[1]}</h1>
+          <div className="box__form">
+            <div className="box__title">
+              <h4 className="title__form">Izglītība</h4>
+            </div>
+            <div className="box__input">
+              <label htmlFor="education">
+                <select name="education" id="education" onChange={(event) => setFormData({ ...formData, education: event.target.value })}>
+                  <option value="empty"> </option>
+                  <option value="pamatizglītība">Pamatizglītība</option>
+                  <option value="vidējā">Vidējā</option>
+                  <option value="arodizglītība">Arodizglītība</option>
+                  <option value="augstākā">Augstākā</option>
+                  <option value="koledžas">Koledžas</option>
+                </select>
+              </label>
+            </div>
+          </div>
         </div>
-        <div>
-          <button onClick={() => {
-            setActiveQuestion(activeQuestion - 1);
-          }}
+        <div className="navigation__underline navigation__underline--second">
+          <button
+            className="prev"
+            onClick={() => { setActiveQuestion(activeQuestion - 1); }}
           >
-            {'<<Atpakaļ'}
+            {'<< Atpakaļ'}
           </button>
-          <button onClick={() => {
-            setActiveQuestion(activeQuestion + 1);
-          }}
+          <button
+            className="next"
+            onClick={() => { setActiveQuestion(activeQuestion + 1); }}
           >
-            {'Tālāk>>'}
+            {'Tālāk >>'}
           </button>
         </div>
       </section>
@@ -264,79 +316,96 @@ const App = () => {
             <a href="-" className="href__beforeLine">{titles[4]}</a>
           </div>
         </div>
-        <div>
-          <h1 className="title">{titles[2]}</h1>
-          <input
-            className="input"
-            type="number"
-            value={formData.salary}
-            onChange={(event) => setFormData({ ...formData, salary: event.target.value })}
-          />
-          <label className="checkbox" htmlFor="stipend">
-            <input
-              type="checkbox"
-              id="stipend"
-              name="stipend"
-              value="stipend"
-              checked={formData.stipend}
-              onChange={() => setFormData(
-                { ...formData, stipend: !formData.stipend },
-              )}
-            />
-            stipendija
-          </label>
-          <label className="checkbox" htmlFor="percent">
-            <input
-              type="checkbox"
-              id="percent"
-              name="percent"
-              value="percent"
-              checked={formData.percent}
-              onChange={() => setFormData(
-                { ...formData, percent: !formData.percent },
-              )}
-            />
-            procenti
-          </label>
-          <label className="checkbox" htmlFor="pension">
-            <input
-              type="checkbox"
-              id="pension"
-              name="pension"
-              value="pension"
-              checked={formData.pension}
-              onChange={() => setFormData(
-                { ...formData, pension: !formData.pension },
-              )}
-            />
-            pensija
-          </label>
-          <label className="checkbox" htmlFor="other">
-            <input
-              type="checkbox"
-              id="other"
-              name="other"
-              value="other"
-              checked={formData.other}
-              onChange={() => setFormData(
-                { ...formData, other: !formData.other },
-              )}
-            />
-            cits
-          </label>
+        <div className="container container__question">
+          <h1 className="title__questions">{titles[2]}</h1>
+          <div className="box__form">
+            <div className="box__title">
+              <h4 className="title__form">Ikmēneša ienākumi pēc nodokļiem </h4>
+              <h4 className="title__form title__form--star">*</h4>
+              <button className="button__question">?</button>
+            </div>
+            <div className="box__input">
+              <input
+                className="input"
+                type="number"
+                value={formData.salary}
+                onChange={(event) => setFormData({ ...formData, salary: event.target.value })}
+              />
+            </div>
+          </div>
+          <div className="box__form">
+            <div className="box__title">
+              <h4 className="title__form">Ikmēneša ienākumi pēc nodokļiem</h4>
+            </div>
+            <div className="box__input">
+              <label className="checkbox" htmlFor="stipend">
+                <input
+                  type="checkbox"
+                  id="stipend"
+                  name="stipend"
+                  value="stipend"
+                  checked={formData.stipend}
+                  onChange={() => setFormData(
+                    { ...formData, stipend: !formData.stipend },
+                  )}
+                />
+                stipendija
+              </label>
+              <label className="checkbox" htmlFor="percent">
+                <input
+                  type="checkbox"
+                  id="percent"
+                  name="percent"
+                  value="percent"
+                  checked={formData.percent}
+                  onChange={() => setFormData(
+                    { ...formData, percent: !formData.percent },
+                  )}
+                />
+                procenti
+              </label>
+              <label className="checkbox" htmlFor="pension">
+                <input
+                  type="checkbox"
+                  id="pension"
+                  name="pension"
+                  value="pension"
+                  checked={formData.pension}
+                  onChange={() => setFormData(
+                    { ...formData, pension: !formData.pension },
+                  )}
+                />
+                pensija
+              </label>
+              <label className="checkbox" htmlFor="other">
+                <input
+                  type="checkbox"
+                  id="other"
+                  name="other"
+                  value="other"
+                  checked={formData.other}
+                  onChange={() => setFormData(
+                    { ...formData, other: !formData.other },
+                  )}
+                />
+                cits
+              </label>
+            </div>
+          </div>
+
         </div>
-        <div>
-          <button onClick={() => {
-            setActiveQuestion(activeQuestion - 1);
-          }}
+        <div className="navigation__underline navigation__underline--second">
+          <button
+            className="prev"
+            onClick={() => { setActiveQuestion(activeQuestion - 1); }}
           >
-            {'<<Atpakaļ'}
+            {'<< Atpakaļ'}
           </button>
-          <button onClick={() => {
-            setActiveQuestion(activeQuestion + 1);
-          }}
+          <button
+            className="next"
+            onClick={() => { setActiveQuestion(activeQuestion + 1); }}
           >
-            {'Tālāk>>'}
+            {'Tālāk >>'}
           </button>
         </div>
       </section>
@@ -365,27 +434,45 @@ const App = () => {
             <a href="-" className="href__beforeLine">{titles[4]}</a>
           </div>
         </div>
-        <div>
-          <h1 className="title">{titles[3]}</h1>
-          <form action="">
-            <label htmlFor="w3review">
-              Review of W3Schools:
-              <textarea id="w3review" name="w3review" />
-            </label>
-          </form>
+        <div className="container container__question">
+          <h1 className="title__questions">{titles[3]}</h1>
+          <div className="box__form">
+            <div className="box__title">
+              <h4 className="title__formArea">Ikmēneša ienākumi pēc nodokļiem</h4>
+            </div>
+            <div className="box_textArea">
+              <label htmlFor="textArea">
+                <textarea
+                  className="textArea"
+                  id="textArea"
+                  name="info"
+                  value={formData.info}
+                  maxLength={500}
+                  onChange={(event) => setFormData({ ...formData, info: event.target.value })}
+                />
+              </label>
+              <h4 className="comment__formArea">
+                Var pievienot vēl
+                {' '}
+                {symbols}
+                {' '}
+                simbolus
+              </h4>
+            </div>
+          </div>
         </div>
-        <div>
-          <button onClick={() => {
-            setActiveQuestion(activeQuestion - 1);
-          }}
+        <div className="navigation__underline navigation__underline--second">
+          <button
+            className="prev"
+            onClick={() => { setActiveQuestion(activeQuestion - 1); }}
           >
-            {'<<Atpakaļ'}
+            {'<< Atpakaļ'}
           </button>
-          <button onClick={() => {
-            setActiveQuestion(activeQuestion + 1);
-          }}
+          <button
+            className="next"
+            onClick={() => { setActiveQuestion(activeQuestion + 1); }}
           >
-            {'Tālāk>>'}
+            {'Tālāk >>'}
           </button>
         </div>
       </section>
@@ -414,46 +501,72 @@ const App = () => {
             <a href="-" className="href__beforeLine">{titles[4]}</a>
           </div>
         </div>
-        <div>
-          <h1 className="title">{titles[4]}</h1>
-          <span>Kopsavilkums</span>
-          <span>Transportlīdzekļa veids</span>
-          <span>
-            {formData.vehicleType}
-          </span>
-          <span>Transportlīdzekļa cena</span>
-          <span>
-            {formData.vehiclePrice}
-            {' '}
-            EUR
-          </span>
-          <span>Transportlīdzekļa izglītība</span>
-          <span>
-            {formData.education}
-          </span>
-          <span>Ikmēneša ienākumi pēc nodokļiem</span>
-          <span>
-            {formData.salary}
-            {' '}
-            EUR
-          </span>
-          <span>Citi ienākumi</span>
-          {formData.stipend === true && <span>stipendija</span>}
-          {formData.percent === true && <span>procenti</span>}
-          {formData.pension === true && <span>pensija</span>}
-          {formData.other === true && <span>citi</span>}
-          <span>Papildus informācija</span>
+        <div className="container container__question">
+          <h1 className="title__questions">{titles[4]}</h1>
+          <div className="summery__row">
+            <h4 className="summery__comment">Transportlīdzekļa veids</h4>
+            <div className="summery__result">
+              <span>
+                {formData.vehicleType}
+              </span>
+            </div>
+          </div>
+          <div className="summery__row">
+            <h4 className="summery__comment">Transportlīdzekļa cena</h4>
+            <div className="summery__result">
+              <span>
+                {formData.vehiclePrice}
+                {' '}
+                EUR
+              </span>
+            </div>
+          </div>
+          <div className="summery__row">
+            <h4 className="summery__comment">Izglītība</h4>
+            <div className="summery__result">
+              <span>
+                {formData.education}
+              </span>
+            </div>
+          </div>
+          <div className="summery__row">
+            <h4 className="summery__comment">Ikmēneša ienākumi pēc nodokļu nomaksas</h4>
+            <div className="summery__result">
+              <span>
+                {formData.salary}
+                {' '}
+                EUR
+              </span>
+            </div>
+          </div>
+          <div className="summery__row">
+            <h4 className="summery__comment">Citi ienākumi</h4>
+            <div className="summery__result">
+              {formData.stipend === true && <span>stipendija</span>}
+              {formData.percent === true && <span>procenti</span>}
+              {formData.pension === true && <span>pensija</span>}
+              {formData.other === true && <span>citi</span>}
+            </div>
+          </div>
+          <div className="summery__row">
+            <h4 className="summery__comment">Papildus informācija</h4>
+            <div className="summery__result">
+              <span>
+                {formData.info}
+              </span>
+            </div>
+          </div>
         </div>
-        <div>
-          <button onClick={() => {
-            setActiveQuestion(activeQuestion - 1);
-          }}
+        <div className="navigation__underline navigation__underline--second">
+          <button
+            className="prev"
+            onClick={() => { setActiveQuestion(activeQuestion - 1); }}
           >
-            {'<<Atpakaļ'}
+            {'<< Atpakaļ'}
           </button>
-          <button onClick={() => {
-            setActiveQuestion(activeQuestion + 1);
-          }}
+          <button
+            className="next"
+            onClick={() => { setActiveQuestion(activeQuestion + 1); }}
           >
             Nosūtīt pieteikumu
           </button>
