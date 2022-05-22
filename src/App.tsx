@@ -42,7 +42,6 @@ const initialFormData: InitialFormData = {
 const App = () => {
   const [formData, setFormData] = useState<InitialFormData>(initialFormData);
   const [activeQuestion, setActiveQuestion] = useState(0);
-  // const [symbols, setSymbols] = useState(500)
 
   const symbols = 500 - formData.info.length;
 
@@ -113,9 +112,7 @@ const App = () => {
           <div className="column__beforeLine">
             <div className="circle__beforeLine active">1</div>
             <span
-              onClick={() => {
-                setActiveQuestion(0);
-              }}
+              onClick={() => { }}
               className="href__beforeLine"
             >
               {titles[0]}
@@ -125,7 +122,7 @@ const App = () => {
             <div className="circle__beforeLine">2</div>
             <span
               onClick={() => {
-                setActiveQuestion(1);
+                setActiveQuestion(activeQuestion + 1);
               }}
               className="href__beforeLine"
             >
@@ -136,7 +133,7 @@ const App = () => {
             <div className="circle__beforeLine">3</div>
             <span
               onClick={() => {
-                setActiveQuestion(2);
+                setActiveQuestion(activeQuestion + 2);
               }}
               className="href__beforeLine"
             >
@@ -147,7 +144,7 @@ const App = () => {
             <div className="circle__beforeLine">4</div>
             <span
               onClick={() => {
-                setActiveQuestion(3);
+                setActiveQuestion(activeQuestion + 3);
               }}
               className="href__beforeLine"
             >
@@ -158,6 +155,7 @@ const App = () => {
             <div className="circle__beforeLine">5</div>
             <span
               onClick={() => {
+                setActiveQuestion(activeQuestion + 4);
               }}
               className="href__beforeLine"
             >
@@ -169,7 +167,7 @@ const App = () => {
           <h1 className="title__questions">{titles[0]}</h1>
           <div className="box__form">
             <div className="box__title">
-              <h4 className="title__form">Transportlīdzekļa veids </h4>
+              <h4 className="title__form">Transportlīdzekļa veids</h4>
               <h4 className="title__form title__form--star">*</h4>
               <button className="button__question">?</button>
             </div>
@@ -181,6 +179,7 @@ const App = () => {
                     name="vehicle"
                     type="radio"
                     value="automašīna"
+                    checked={formData.vehicleType === 'automašīna'}
                     onChange={(event) => setFormData({ ...formData, vehicleType: event.target.value })}
                   />
                   automašīna
@@ -191,6 +190,7 @@ const App = () => {
                     name="vehicle"
                     type="radio"
                     value="motocikls"
+                    checked={formData.vehicleType === 'motocikls'}
                     onChange={(event) => setFormData({ ...formData, vehicleType: event.target.value })}
                   />
                   motocikls
@@ -201,6 +201,7 @@ const App = () => {
                     name="vehicle"
                     type="radio"
                     value="cits"
+                    checked={formData.vehicleType === 'cits'}
                     onChange={(event) => setFormData({ ...formData, vehicleType: event.target.value })}
                   />
                   cits
@@ -236,24 +237,55 @@ const App = () => {
       <section className="section section__question">
         <div className="navigation__beforeLine">
           <div className="column__beforeLine">
-            <div className="circle__beforeLine active">1</div>
-            <a href="-" className="href__beforeLine">{titles[0]}</a>
+            <div className="circle__beforeLine done">1</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 1); }}
+              className="href__beforeLine"
+            >
+              {titles[0]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">2</div>
-            <a href="-" className="href__beforeLine">{titles[1]}</a>
+            <div className="circle__beforeLine active">2</div>
+            <span
+              onClick={() => { }}
+              className="href__beforeLine"
+            >
+              {titles[1]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">3</div>
-            <a href="-" className="href__beforeLine">{titles[2]}</a>
+            <span
+              onClick={() => {
+                setActiveQuestion(activeQuestion + 1);
+              }}
+              className="href__beforeLine"
+            >
+              {titles[2]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">4</div>
-            <a href="-" className="href__beforeLine">{titles[3]}</a>
+            <span
+              onClick={() => {
+                setActiveQuestion(activeQuestion + 2);
+              }}
+              className="href__beforeLine"
+            >
+              {titles[3]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">5</div>
-            <a href="-" className="href__beforeLine">{titles[4]}</a>
+            <span
+              onClick={() => {
+                setActiveQuestion(activeQuestion + 3);
+              }}
+              className="href__beforeLine"
+            >
+              {titles[4]}
+            </span>
           </div>
         </div>
         <div className="container container__question">
@@ -264,7 +296,12 @@ const App = () => {
             </div>
             <div className="box__input">
               <label htmlFor="education">
-                <select name="education" id="education" onChange={(event) => setFormData({ ...formData, education: event.target.value })}>
+                <select
+                  name="education"
+                  id="education"
+                  value={formData.education}
+                  onChange={(event) => setFormData({ ...formData, education: event.target.value })}
+                >
                   <option value="empty"> </option>
                   <option value="pamatizglītība">Pamatizglītība</option>
                   <option value="vidējā">Vidējā</option>
@@ -296,24 +333,51 @@ const App = () => {
       <section className="section section__question">
         <div className="navigation__beforeLine">
           <div className="column__beforeLine">
-            <div className="circle__beforeLine active">1</div>
-            <a href="-" className="href__beforeLine">{titles[0]}</a>
+            <div className="circle__beforeLine done">1</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 2); }}
+              className="href__beforeLine"
+            >
+              {titles[0]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">2</div>
-            <a href="-" className="href__beforeLine">{titles[1]}</a>
+            <div className="circle__beforeLine done">2</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 1); }}
+              className="href__beforeLine"
+            >
+              {titles[1]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">3</div>
-            <a href="-" className="href__beforeLine">{titles[2]}</a>
+            <div className="circle__beforeLine active">3</div>
+            <span
+              onClick={() => { }}
+              className="href__beforeLine"
+            >
+              {titles[2]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">4</div>
-            <a href="-" className="href__beforeLine">{titles[3]}</a>
+            <span
+              onClick={() => {
+                setActiveQuestion(activeQuestion + 1);
+              }}
+              className="href__beforeLine"
+            >
+              {titles[3]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">5</div>
-            <a href="-" className="href__beforeLine">{titles[4]}</a>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion + 2); }}
+              className="href__beforeLine"
+            >
+              {titles[4]}
+            </span>
           </div>
         </div>
         <div className="container container__question">
@@ -414,24 +478,51 @@ const App = () => {
       <section className="section section__question">
         <div className="navigation__beforeLine">
           <div className="column__beforeLine">
-            <div className="circle__beforeLine active">1</div>
-            <a href="-" className="href__beforeLine">{titles[0]}</a>
+            <div className="circle__beforeLine done">1</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 3); }}
+              className="href__beforeLine"
+            >
+              {titles[0]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">2</div>
-            <a href="-" className="href__beforeLine">{titles[1]}</a>
+            <div className="circle__beforeLine done">2</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 2); }}
+              className="href__beforeLine"
+            >
+              {titles[1]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">3</div>
-            <a href="-" className="href__beforeLine">{titles[2]}</a>
+            <div className="circle__beforeLine done">3</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 1); }}
+              className="href__beforeLine"
+            >
+              {titles[2]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">4</div>
-            <a href="-" className="href__beforeLine">{titles[3]}</a>
+            <div className="circle__beforeLine active">4</div>
+            <span
+              onClick={() => {
+
+              }}
+              className="href__beforeLine"
+            >
+              {titles[3]}
+            </span>
           </div>
           <div className="column__beforeLine">
             <div className="circle__beforeLine">5</div>
-            <a href="-" className="href__beforeLine">{titles[4]}</a>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion + 1); }}
+              className="href__beforeLine"
+            >
+              {titles[4]}
+            </span>
           </div>
         </div>
         <div className="container container__question">
@@ -481,24 +572,49 @@ const App = () => {
       <section className="section section__question">
         <div className="navigation__beforeLine">
           <div className="column__beforeLine">
-            <div className="circle__beforeLine active">1</div>
-            <a href="-" className="href__beforeLine">{titles[0]}</a>
+            <div className="circle__beforeLine done">1</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 4); }}
+              className="href__beforeLine"
+            >
+              {titles[0]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">2</div>
-            <a href="-" className="href__beforeLine">{titles[1]}</a>
+            <div className="circle__beforeLine done">2</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 3); }}
+              className="href__beforeLine"
+            >
+              {titles[1]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">3</div>
-            <a href="-" className="href__beforeLine">{titles[2]}</a>
+            <div className="circle__beforeLine done">3</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 2); }}
+              className="href__beforeLine"
+            >
+              {titles[2]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">4</div>
-            <a href="-" className="href__beforeLine">{titles[3]}</a>
+            <div className="circle__beforeLine done">4</div>
+            <span
+              onClick={() => { setActiveQuestion(activeQuestion - 1); }}
+              className="href__beforeLine"
+            >
+              {titles[3]}
+            </span>
           </div>
           <div className="column__beforeLine">
-            <div className="circle__beforeLine">5</div>
-            <a href="-" className="href__beforeLine">{titles[4]}</a>
+            <div className="circle__beforeLine active">5</div>
+            <span
+              onClick={() => { }}
+              className="href__beforeLine"
+            >
+              {titles[4]}
+            </span>
           </div>
         </div>
         <div className="container container__question">
@@ -542,10 +658,10 @@ const App = () => {
           <div className="summery__row">
             <h4 className="summery__comment">Citi ienākumi</h4>
             <div className="summery__result">
-              {formData.stipend === true && <span>stipendija</span>}
-              {formData.percent === true && <span>procenti</span>}
-              {formData.pension === true && <span>pensija</span>}
-              {formData.other === true && <span>citi</span>}
+              {formData.stipend && <span>stipendija</span>}
+              {formData.percent && <span>procenti</span>}
+              {formData.pension && <span>pensija</span>}
+              {formData.other && <span>citi</span>}
             </div>
           </div>
           <div className="summery__row">
